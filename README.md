@@ -1,79 +1,86 @@
-💾 ChatGPT Chat Saver – Chrome Extension
+# 💾 SaveGPT
 
-A lightweight Chrome extension that lets you quickly export your ChatGPT conversations as JSON or Markdown files.
+> Save temporary and anonymous ChatGPT conversations as JSON or Markdown — instantly.
 
-Perfect for archiving chats, sharing conversations, creating documentation, or importing into other tools.
+SaveGPT is a lightweight Chrome extension that lets you export chats that would otherwise disappear.
 
-✨ Features
+---
 
-✅ Save current ChatGPT conversation as JSON
+## ✨ Features
 
-✅ Save current ChatGPT conversation as Markdown (.md)
+- ✅ Export chat as **JSON**
+- ✅ Export chat as **Markdown (.md)**
+- ✅ Floating **Save Chat** button
+- ✅ Keyboard shortcut support  
+- ✅ Preserves code blocks
+- ✅ 100% client-side processing
+- ✅ No tracking. No data collection.
 
-✅ Floating “Save Chat” button (only in specific chat modes — see below)
+---
 
-✅ Keyboard shortcut:
+## 📌 Where It Works
 
-Mac: ⌘ + ⇧ + S
+SaveGPT intentionally shows the **Save Chat** button only in:
 
-Windows/Linux: Ctrl + Shift + S
+- 🟡 Temporary chats  
+- 🔓 Logged-out (anonymous) chats  
 
-✅ Clean UI with toast confirmation
+It does **NOT** appear in regular logged-in saved conversations.
 
-✅ No external servers — everything runs locally in your browser
+Why?  
+Temporary and logged-out chats are not stored in your history. SaveGPT helps you preserve them before they disappear.
 
-✅ No tracking, no analytics, no data collection
+---
 
-📌 Where the Save Button Appears
+## ⌨️ Keyboard Shortcut
 
-The “Save Chat” button is intentionally limited to:
+Quick save as JSON:
 
-🟡 Temporary Chats
+- **Mac:** `⌘ + ⇧ + S`
+- **Windows/Linux:** `Ctrl + Shift + S`
 
-🔓 Logged-out (anonymous) Chats
+The shortcut works in the same contexts where the Save button is available.
 
-The button does NOT appear in regular logged-in persistent chats.
+---
 
-This is controlled by checking the URL structure (the button is hidden when the URL contains /c/, which indicates a saved conversation thread).
+## 📦 Installation (Developer Mode)
 
-Why?
+1. Download or clone this repository.
+2. Open Chrome.
+3. Navigate to:
+```chrome://extensions/ ```
 
-Temporary and logged-out chats are not automatically saved to your ChatGPT history.
-This extension helps you preserve those conversations before they disappear.
 
-📦 What It Does
 
-The extension:
 
-Extracts all visible chat messages using the data-message-author-role attribute.
+6. Enable **Developer Mode** (top right).
+7. Click **Load unpacked**.
+8. Select the extension folder.
 
-Preserves:
+The extension will now be active.
 
-User messages
 
-Assistant messages
+## 📁 Output Format
 
-Code blocks (wrapped properly in triple backticks)
+### JSON
 
-Allows you to download:
-
-A structured .json file
-
-A formatted .md Markdown file
-
-📁 Output Format
-JSON Structure
+```json
 [
-  {
-    "role": "user",
-    "content": "Hello"
-  },
-  {
-    "role": "assistant",
-    "content": "Hi there!"
-  }
+{
+ "role": "user",
+ "content": "Hello"
+},
+{
+ "role": "assistant",
+ "content": "Hi there!"
+}
+
 ]
-Markdown Structure
+
+```
+### Markdown
+
+```markdown
 ## USER
 
 Hello
@@ -81,64 +88,40 @@ Hello
 ## ASSISTANT
 
 Hi there!
-⌨️ Keyboard Shortcut
+```
 
-Quick save as JSON:
 
-Mac: ⌘ + ⇧ + S
 
-Windows/Linux: Ctrl + Shift + S
 
-The shortcut works in the same contexts where the save button is available (temporary and logged-out chats).
 
-🚀 Installation (Developer Mode)
 
-Download or clone this repository.
+## 🧠 How It Works
 
-Open Chrome.
+- Extracts messages using the `data-message-author-role` attribute
+- Preserves code blocks using triple backticks
+- Builds a structured message array
+- Generates a downloadable file using the browser Blob API
+- Triggers a local file download
 
-Go to:
+Everything runs directly inside your browser.
 
-chrome://extensions/
+---
 
-Enable Developer mode (top right).
+## 🔒 Privacy
 
-Click Load unpacked.
+SaveGPT:
 
-Select the extension folder.
+- Does NOT send data to external servers
+- Does NOT store your chats
+- Does NOT use analytics
+- Does NOT run background tracking
 
-The extension will now be active on supported ChatGPT pages.
+All processing happens locally.
 
-🧠 How It Works
+---
 
-Injects a floating “Save Chat” button after page load.
+## ⚠️ Notes
 
-Only injects the button if the page is:
-
-A temporary chat, or
-
-A logged-out chat.
-
-Extracts message nodes from the DOM.
-
-Builds a structured array of { role, content }.
-
-Generates a downloadable Blob.
-
-Triggers a local file download.
-
-All processing is done client-side.
-
-🔒 Privacy
-
-This extension:
-
-Does NOT send data anywhere
-
-Does NOT store your chats
-
-Does NOT use background servers
-
-Does NOT require external APIs
-
-Everything happens locally in your browser session.
+- Works only on ChatGPT pages
+- Relies on the current page structure
+- If ChatGPT updates its layout, minor adjustments may be required
